@@ -1,0 +1,9 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: book-service
+  logging:
+    level:
+      org.springframework.boot.context.config: DEBUG
