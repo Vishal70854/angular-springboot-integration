@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BookService } from '../book-service';
 
 @Component({
   selector: 'app-book',
@@ -11,14 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Book implements OnInit{
   
-  books: any[] = [];
+  books: any;
   
-  constructor(private http : HttpClient){}
+  constructor(private service : BookService) {}
   ngOnInit(): void {
     console.log('Book component initialized');
     
-    let response = this.http.get<any[]>("http://localhost:9090/findAllBooks");
-    response.subscribe((data) => this.books = data);
+    this.books = this.service.getBooks().subscribe(data => this.books=data);
     
     console.log('Book component executed!!')
   }
