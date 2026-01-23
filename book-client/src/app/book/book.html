@@ -7,7 +7,7 @@
       <th>Name</th>
       <th>Price</th>
     </tr>
-      <tr *ngFor="let book of books">
+      <tr *ngFor="let book of books$ | async">
         <td>{{ book.id }}</td>
         <td>{{ book.name }}</td>
         <td>{{ book.price }}</td>

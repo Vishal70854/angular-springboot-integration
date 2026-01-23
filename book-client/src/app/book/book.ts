@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book-service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-book',
@@ -9,18 +10,32 @@ import { BookService } from '../book-service';
   templateUrl: './book.html',
   styleUrl: './book.css',
 })
-export class Book implements OnInit{
+export class Book{
   
-  books: any;
+  books$!: Observable<any[]>;
   
-  constructor(private service : BookService) {}
-  ngOnInit(): void {
-    console.log('Book component initialized');
-    
-    this.books = this.service.getBooks().subscribe(data => this.books=data);
-    
-    console.log('Book component executed!!')
+  constructor(private service: BookService) {
+    this.books$ = this.service.getBooks();
   }
+  
+  // ngOnInit(): void {
+  // console.log('ngOnInit fired');
+
+  // this.service.getBooks().subscribe({
+  //     next: data => {
+  //       console.log('API response:', data);
+  //       this.books = data;
+  //     },
+  //     error: err => {
+  //       console.error('HTTP ERROR:', err);
+  //     }
+  //   });
+  // }
 
 
+  // ngOnInit(): void {
+  //   this.service.getBooks().subscribe(data => {
+  //     this.books = data;
+  //   });
+  // }    
 }
